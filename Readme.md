@@ -11,3 +11,5 @@ Zweig initialisiert wird. Diese Readme-Datei wird durch eine Zusammenfassung der
 wird das folgende Inhaltsverzeichnis um einen Link auf jeden neu erzeugten Zweig ergänzt.
 
 # Inhaltsverzeichnis
+
+[01. Strings](https://github.com/barsuhn/rust-daily/tree/strings)
