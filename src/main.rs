@@ -1,3 +1,93 @@
 fn main() {
-    println!("Hello, Rust!");
+    println!("Strings");
+
+    slice_memory();
+    slice_utf8();
+    slice_iteration();
+
+    byte_string();
+    raw_string();
+
+    string_creation();
+    string_parsing();
+}
+
+fn slice_memory() {
+    let greeting = "Hello, world!";
+
+    println!();
+    println!("slice: {}", greeting);
+    println!("reference: {:p}", greeting); // the reference is a fat pointer
+    println!("address: {:p} length: {}", greeting.as_ptr(), greeting.len());
+}
+
+fn slice_utf8() {
+    let greeting = "Grüße!";
+
+    println!();
+    println!("slice: {}", greeting);
+    println!("reference: {:p}", greeting);
+    println!("address: {:p} length: {} characters: {}", greeting.as_ptr(), greeting.len(), greeting.chars().count());
+}
+
+fn slice_iteration() {
+    let greeting = "Hello, Länd!";
+
+    println!();
+    println!("slice: {}", greeting);
+    print!("bytes: ");
+    for byte in greeting.bytes() {
+        print!("{:x} ", byte);
+    }
+    println!();
+
+    print!("chars: ");
+    for char in greeting.chars() {
+        print!("{} ", char);
+    }
+    println!();
+
+    print!("char indices: ");
+    for index in greeting.char_indices() {
+        print!("{:?} ", index);
+    }
+    println!();
+}
+
+fn byte_string() {
+    let greeting = b"Hello, world!";
+
+    println!();
+    println!("byte string: {:?}", greeting);
+}
+
+fn raw_string() {
+    let path = r"C:\Users\Rust";
+    let quoted = r#"In "Anführungszeichen""#;
+    let hashed = r##"In #"Extremo"#"##;
+
+    println!();
+    println!("raw string: {}", path);
+    println!("string with quotes: {}", quoted);
+    println!("string with hashed quotes: {}", hashed);
+}
+
+fn string_creation() {
+    let greeting = "Hello, world!".to_string();
+    let rusty = String::from("Let's get rusty!");
+
+    println!();
+    println!("string: {}", greeting);
+    println!("rusty: {}", rusty);
+}
+
+fn string_parsing() {
+    let number = 42;
+    let string = format!("{}", number);
+    let value: i32 = string.parse().unwrap();
+    let slice_value = "42.0".parse::<f64>().unwrap();
+
+    println!();
+    println!("conversions: {:?} -> {:?} -> {:?}", number, string, value);
+    println!("slice parsing: {:?} -> {:?}", "42.0", slice_value);
 }
