@@ -168,12 +168,12 @@ werden soll, direkt im Klammernpaar anzugeben. Folgende Vorgaben zur Formatierun
 - `:E` - Gleitkommazahl in wissenschaftlicher Notation mit großem "E" ausgeben.
 - `:.{n}` - Gleitkommazahl mit `n` Nachkommastellen ausgeben.
 - `:.{n}$` - Gleitkommazahl mit `k` Nachkommastellen ausgeben, wobei `k` der `n`-te Parameter des Makros ist.
-- `:^{n}` - Ausgabe zentriert in einem `n` Zeichen großen Bereich ausgeben, der mit Leerzeichen gefüllt wird.
-- `:<{n}` - Ausgabe linksbündig in einem `n` Zeichen großen Bereich ausgeben, der mit dem Zeichen `c` gefüllt wird.
-- `:>{n}` - Ausgabe rechtsbündig in einem `n` Zeichen großen Bereich ausgeben, der mit dem Zeichen `c` gefüllt wird.
-- `:{c}^{n}` - Ausgabe zentriert in einem `n` Zeichen großen Bereich ausgeben, der mit dem Zeichen `c` gefüllt wird.
-- `:{c}<{n}` - Ausgabe linksbündig in einem `n` Zeichen großen Bereich ausgeben, der mit dem Zeichen `c` gefüllt wird.
-- `:{c}>{n}` - Ausgabe rechtsbündig in einem `n` Zeichen großen Bereich ausgeben, der mit dem Zeichen `c` gefüllt wird.
+- `:^{n}` - Zentriert in einem `n` Zeichen großen Bereich, der mit Leerzeichen gefüllt wird.
+- `:<{n}` - Linksbündig in einem `n` Zeichen großen Bereich, der mit Leerzeichen gefüllt wird.
+- `:>{n}` - Rechtsbündig in einem `n` Zeichen großen Bereich, der mit Leerzeichen gefüllt wird.
+- `:{c}^{n}` - Zentriert in einem `n` Zeichen großen Bereich, der mit dem Zeichen `c` gefüllt wird.
+- `:{c}<{n}` - Linksbündig in einem `n` Zeichen großen Bereich, der mit dem Zeichen `c` gefüllt wird.
+- `:{c}>{n}` - Rechtsbündig in einem `n` Zeichen großen Bereich, der mit dem Zeichen `c` gefüllt wird.
 
 ### Teilzeichenketten ersetzen
 
