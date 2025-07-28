@@ -12,4 +12,5 @@ wird das folgende Inhaltsverzeichnis um einen Link auf jeden neu erzeugten Zweig
 
 # Inhaltsverzeichnis
 
-[01. Strings](https://github.com/barsuhn/rust-daily/tree/strings)
+- [01. Strings](https://github.com/barsuhn/rust-daily/tree/strings)
+- [02. Collections](https://github.com/barsuhn/rust-daily/tree/collections)
