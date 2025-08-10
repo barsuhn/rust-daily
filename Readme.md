@@ -62,7 +62,7 @@ if d.is_err() {
 
 ## Gleitkommatypen
 
-In Rust gibt es drei Typen für Gleitkommazahlen: `f32`, `f64` und `f128`. Gleitkommakonstanten müssen einen 
+In Rust gibt es zwei Typen für Gleitkommazahlen: `f32` und `f64`. Gleitkommakonstanten müssen einen 
 Dezimalpunkt enthalten. Ohne Dezimalpunkt handelt es sich um eine Konstante für eine ganze Zahl und diese müsste 
 erst in ein Gleitkommazahl umgewandelt werden.
 
