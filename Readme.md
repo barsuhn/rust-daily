@@ -13,7 +13,7 @@ wird das folgende Inhaltsverzeichnis um einen Link auf jeden neu erzeugten Zweig
 # Inhaltsverzeichnis
 
 - [01. Types](https://github.com/barsuhn/rust-daily/tree/types)
-- [01. Strings](https://github.com/barsuhn/rust-daily/tree/strings)
-- [02. Collections](https://github.com/barsuhn/rust-daily/tree/collections)
-- [03. Expressions](https://github.com/barsuhn/rust-daily/tree/expressions)
-- [04. Functions](https://github.com/barsuhn/rust-daily/tree/functions)
+- [02. Strings](https://github.com/barsuhn/rust-daily/tree/strings)
+- [03. Collections](https://github.com/barsuhn/rust-daily/tree/collections)
+- [04. Expressions](https://github.com/barsuhn/rust-daily/tree/expressions)
+- [05. Functions](https://github.com/barsuhn/rust-daily/tree/functions)
