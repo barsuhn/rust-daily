@@ -2,6 +2,7 @@ fn main() {
    integer_conversion();
     floating_point();
     string_and_char();
+    booleans();
 }
 
 fn integer_conversion() {
@@ -35,4 +36,14 @@ fn string_and_char() {
         print!("{character}");
     }
     println!();
+}
+
+fn booleans() {
+    let mut x:bool = false;
+
+    x = !x;
+
+    if x {
+        println!("True!");
+    }
 }

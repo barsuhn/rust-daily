@@ -89,3 +89,18 @@ for c in emotional_greet.chars() {
 }
 println!();
 ```
+
+## Logische Werte
+
+Für logische Werte gibt es den Typ `bool`. Variablen vom Typ `bool` können den Wert `true` oder `false` haben.
+Überall, wo eine Bedingung erwartet wird, kann auch ein `bool` Ausdruck verwendet werden.
+
+```rust
+let mut x:bool = false;
+
+x = !x;
+
+if x {
+  println!("True!");
+}
+```
