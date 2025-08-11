@@ -196,11 +196,12 @@ Die Schleife wird so lange ausgeführt, bis die Bedingung falsch wird. Wie bei `
 für die Bedingung verwendet.
 
 ```rust
-let i = 1;
+let mut i = 1;
 
 print!("{}", i-1);
 while i <= 5 {
-    print!(", {i}");
+  print!(", {i}");
+  i = i + 1;
 }
 
 println!();
