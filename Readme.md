@@ -32,6 +32,41 @@ if x % 2 == 0 {
 
 println!("The value of y is: {}", y);
 ```
+#### Veränderbarkeit
+
+Variablen sind in Rust normalerweise nicht veränderbar. Wenn man den Wert einer Variablen nachträglich verändern
+möchte, dann muss man das bei der Deklaration durch Verwendung des Schlüsselworts `mut` (steht für *mutable*)
+explizit vorgeben.
+
+```rust
+let x = 21;
+let mut y = x;
+
+y = y * 2;
+
+println!("x = {x}, y = {y}");
+```
+
+#### Verschattung
+
+In vielen anderen Programmiersprachen darf man in einem Block eine Variable nur einmal definieren. In Rust kann
+man in einem Block mehrere Variablen mit dem gleichen Namen verwenden. Es handelt sich dabei aber um zwei
+verschiedene Variablen, die den gleichen Namen verwenden. Nach der Definition einer neuen Variable mit gleichem
+Namen wird mit dem namen nur noch die neue Definition verwendet. Auf die vorherige Variable kann man dann nicht
+mehr zugreifen. Dieses Prinzip nennt man in Rust *Verschattung*. Bei der Verschattung kann die neue Variable sogar
+sogar einen anderen Typ bekommen.
+
+```rust
+let x = 21;
+let y = 5;
+
+print!("x = {x}, y = {y} --> ");
+
+let x = 2 * x;
+let y = "I changed";
+
+println!("x = {x}, y = {y}");
+```
 
 ### Typ-Deklarationen, Implementierungen und Funktionen
 

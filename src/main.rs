@@ -1,5 +1,7 @@
 fn main() {
     declaration();
+    mutability();
+    shadowing();
     conditional_statement();
     conditional_expression();
     endless_loop();
@@ -28,6 +30,27 @@ fn declaration() {
     let z = Value::new(y);
 
     println!("The value of z is: {}", z.0);
+}
+
+fn mutability() {
+    let x = 21;
+    let mut y = x;
+
+    y = y * 2;
+
+    println!("x = {x}, y = {y}");
+}
+
+fn shadowing() {
+    let x = 21;
+    let y = 5;
+
+    print!("x = {x}, y = {y} --> ");
+
+    let x = 2 * x;
+    let y = "I changed";
+
+    println!("x = {x}, y = {y}");
 }
 
 fn conditional_statement() {
