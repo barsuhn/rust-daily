@@ -1,19 +1,137 @@
-# Rust daily
+# Strukturen
 
-In diesem Repository versuche ich jeden Tag ein gelerntes Sprachfeature von Rust im Rahmen eines Projekts zu verwenden
-um das Verständnis zu vertiefen. Vorbild für diese Vorgehensweise war das gitHub Repository 
-[daily-bevy](https://github.com/awwsmm/daily-bevy).
+## Module und Sichtbarkeit
 
-# Struktur
+Wenn der Code auf mehrere Dateien aufgeteilt wird, bezeichnet man jede Datei ein Modul. Der Name des Moduls
+wird durch den Namen der Datei vorgegeben. Alle Elemente eines Moduls sind normalerweise nur innerhalb des 
+Moduls sichtbar. Um ein Programmkonstrukt in einem Modul für andere Module sichtbar zu machen, muss das
+das Konstrukt mit dem Schlüsselwort `pub` als öffentlich (public) gekennzeichnet werden. In diesem Abschnitt 
+werden alle Strukturdefinitionen in einem eigenständigen Modul definiert. Alles was in diesem Modul nicht 
+mit `pub` markiert wird, bleibt damit für andere Module unsichtbar.
 
-Für jede Lerneinheit wird ein git Zweig angelegt. Dieser Hauptzweig definiert die Projektstruktur, mit der jeder 
-Zweig initialisiert wird. Diese Readme-Datei wird durch eine Zusammenfassung der Lerneinheit ersetzt. Im main-Branch 
-wird das folgende Inhaltsverzeichnis um einen Link auf jeden neu erzeugten Zweig ergänzt.
+# Deklaration
 
-# Inhaltsverzeichnis
+Zusammengesetzte Datenstrukturen werden in Rust mit dem Schlüsselwort `struct` deklariert. In geschweiften 
+Klammern werden dann die Elemente der Struktur aufgelistet. Die einzelnen Elemente bestehen aus einem Namen und
+einem Typ der durch einen Doppelpunkt getrennt hinter dem Namen geschrieben wird. Wenn das Strukturelement 
+nach außen sichtbar sein soll, dann muss es als öffentlich (`pub`) gekennzeichnet werden. Die Elemente werden 
+durch Kommata getrennt, wobei auch hinter dem letzten Element ein Komma stehen darf. Ein Komma hinter alle 
+Elemente zu schreiben, erleichtert die spätere Erweiterung der Strukturen.
 
-- [01. Expressions](https://github.com/barsuhn/rust-daily/tree/expressions)
-- [02. Types](https://github.com/barsuhn/rust-daily/tree/types)
-- [03. Functions](https://github.com/barsuhn/rust-daily/tree/functions)
-- [04. Strings](https://github.com/barsuhn/rust-daily/tree/strings)
-- [05. Collections](https://github.com/barsuhn/rust-daily/tree/collections)
+Zur Erzeugung einer Strukturinstanz wird der Name der Struktur gefolgt von einer Initialisierungsliste
+angegeben. Die Initialisierungsliste enthält Paare von Namen und Werten, die durch Doppelpunkte voneinander 
+getrennt werden. Die Paare werden wiederum durch Kommata getrennt. Wird ein Strukturelement mit einer Variablen 
+initialisiert, deren Name mit dem Elementnamen übereinstimmt, so kann einfach der Name der Variablen verwendet 
+werden. Im folgenden Beispiel kann statt `age: age` in der Initialisierungsliste einfach `age` geschrieben werden. 
+Beim Element `name` ist das nicht der Fall, weil die Parametervariable zwar den gleichen Namen aber nicht den 
+gleichen Typ wie das Strukturelement hat.
+
+```rust
+pub struct Person {
+    pub name: String,
+    pub age: u8,
+}
+
+pub fn person(name: &str, age: u8) -> Person {
+    Person {
+        name: name.to_string(),
+        age,
+    }
+}
+```
+
+## Implementierungen
+
+Strukturen können auch Funktionen zugeordnet werden. Dies wird mithilfe eines `impl` Blocks definiert. Die
+Funktionen können dabei als ersten Parameter eine Referenz auf ein Objekt der zugeordneten Struktur erhalten. 
+In diesem Fall wird die Funktion den Instanzen der Struktur zugeordnet. Ist die Referenz auf die Strukturinstanz 
+zudem veränderbar, so kann die Funktion die Instanz auch verändern. Wenn kein Instanzparameter zugeordnet wird, 
+dann wird die Funktion für den Strukturtyp deklariert.
+
+Die Funktion `new` im folgenden Beispiel ist dem Typ `Exam` zugeordnet. Die Funktionen `set_grade()` und
+`print_ceretificate()` haben jedoch einen `self` Parameter, was sie zu Instanzfunktionen macht. Die Referenz 
+auf die Instanz muss dabei den Namen `self` haben. Der Typ wird nicht angegeben, da der `impl` Block bereits 
+den Typ festlegt. Die Funktion `set_grade()` bekommt self sogar als `&mut`, was eine Veränderung der Instanz 
+ermöglicht.
+
+Das kaufmännische und `&` wird in diesem Kontext verwendet, um eine sogenannte Referenz zu deklarieren. Wenn 
+das `&` fehlt, dann würde der Parameter als Wert übergeben, was in den meisten Fällen bedeutet, das das 
+Funktionsargument für den Aufrufer ungültig wird. Man spricht dabei von der Übertragung der Eigentümerschaft 
+am übergebenen Wert an die Funktion. Referenzen werden hingegen nur *geborgt*. Die Eigentümerschaft bleibt 
+dabei beim Aufrufer. Eigentümerschaft und *borgen* (*borrowing*) werden in einem anderen Abschnitt ausführlicher 
+erläutert.
+
+```rust
+use super::person::Person;
+
+pub struct Exam {
+    attendee: Person,
+    subject: String,
+    grade: Option<u8>,
+}
+
+impl Exam {
+    pub fn new(attendee: Person, subject: &str) -> Self {
+        Self {
+            attendee,
+            subject: subject.to_string(),
+            grade: None,
+        }
+    }
+
+    pub fn set_grade(&mut self, grade: u8) {
+        self.grade = Some(grade);
+    }
+
+    pub fn print_certificate(&self) {
+        match self.grade {
+            Some(grade) =>  {
+                if grade > 4 {
+                    println!("{} hat die Prüfung in {} nicht bestanden.", self.attendee.name, self.subject);
+                } else {
+                    println!("{} hat die Prüfung in {} mit der Note {} bestanden.", self.attendee.name, self.subject, grade);
+                }
+            }
+            None => println!("{} hat die Prüfung in {} noch nicht absolviert.", self.attendee.name, self.subject),
+        }
+    }
+}
+```
+
+## Verwendung
+
+Im übergeordneten Modul müssen Untermodule mit dem Schlüsselwort `mod` deklariert werden. In diesem Fall ist das
+übergeordnete Modul die Datei `main.rs`, welche die Wurzel des Modulbaums der ausführbaren Datei bildet. 
+
+Die Variable `buddy` ist eine Instanz der Struktur `Person`. Mit dem Punkt-Operator `.` kann man auf die Elemente
+einer Struktur zugreifen. Da sie mit `let mut` deklariert wurde, kann ein Strukturelement sogar auf der linken Seite
+einer Zuweisung stehen.
+
+Die Variable `exam` erzeugt mit Hilfe der Funktion `new` eine neue Instanz der Struktur `Exam`. Es handelt sich um
+eine Typfunktion und wird deshalb mit dem Typnamen gefolgt von zwei Doppelpunkten `::` verwendet. Da die 
+verändernde Instanzfunktion `set_grade()` von `exam` aufgerufen wird, muss die Variable ebenfalls mit `let mut` 
+deklariert werden. Instanzfunktionen werden mit der Instanzvariablen aufgerufen und mit dem Punkt-Operator `.` 
+vom Variablennamen getrennt.
+
+```rust
+mod person;
+mod exam;
+
+use person::make_person;
+use exam::Exam;
+
+fn main() {
+    let mut buddy = make_person("Bob", 41);
+
+    println!("Das ist mein Kumpel {}. Er war gestern noch {} Jahre alt.", buddy.name, buddy.age);
+    buddy.age += 1;
+    println!("Heute ist aber sein Geburtstag und er ist {} Jahre alt geworden.", buddy.age);
+
+    let mut exam = Exam::new(buddy, "Sackhüpfen");
+
+    exam.print_certificate();
+    exam.set_grade(3);
+    exam.print_certificate();
+}
+```
+
