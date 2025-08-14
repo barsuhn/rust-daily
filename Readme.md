@@ -1,23 +1,9 @@
-# Rust daily
+# Enumerationen
 
-In diesem Repository versuche ich jeden Tag ein gelerntes Sprachfeature von Rust im Rahmen eines Projekts zu verwenden
-um das Verständnis zu vertiefen. Vorbild für diese Vorgehensweise war das gitHub Repository 
-[daily-bevy](https://github.com/awwsmm/daily-bevy).
+Enumerationen sind Typen mit denen zwischen verschiedenen Varianten eines Werts unterschieden werden kann.
 
-# Struktur
+## Option
 
-Für jede Lerneinheit wird ein git Zweig angelegt. Dieser Hauptzweig definiert die Projektstruktur, mit der jeder 
-Zweig initialisiert wird. Diese Readme-Datei wird durch eine Zusammenfassung der Lerneinheit ersetzt. Im main-Branch 
-wird das folgende Inhaltsverzeichnis um einen Link auf jeden neu erzeugten Zweig ergänzt.
+## Result
 
-# Inhaltsverzeichnis
-
-- [01. Expressions](https://github.com/barsuhn/rust-daily/tree/expressions)
-- [02. Types](https://github.com/barsuhn/rust-daily/tree/types)
-- [03. Functions](https://github.com/barsuhn/rust-daily/tree/functions)
-- [04. Strings](https://github.com/barsuhn/rust-daily/tree/strings)
-- [05. Collections](https://github.com/barsuhn/rust-daily/tree/collections)
-- [06. Structures](https://github.com/barsuhn/rust-daily/tree/structures)
-- [07. Enums](https://github.com/barsuhn/rust-daily/tree/enums)
-- [07. Borrowing](https://github.com/barsuhn/rust-daily/tree/borrowing)
-- [07. Traits](https://github.com/barsuhn/rust-daily/tree/traits)
+## Eigene Enumerationstypen
