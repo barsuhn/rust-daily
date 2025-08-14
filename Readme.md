@@ -35,7 +35,7 @@ angegeben werden. Beispiele:
 - `123_456` - Die ganze Zahl `123456` mit Tausendertrenung.
 - `123_u8` - Die ganze Zahl `123` vom Typ `u8`.
 - `0xbeef` - Die hexadezimale Zahl `beef` (entspricht 48879 dezimal).
-- `0b1001_0001_1000_1010u16` - Die binäre Zahl `1001000110001010` (entspricht dezimal 37258) vom Typ `u16`.
+- `0b1001_0001_1000_1010_u16` - Die binäre Zahl `1001000110001010` (entspricht dezimal 37258) vom Typ `u16`.
 
 Eine Umwandlung zwischen ganzen Zahlen muss immer explizit angegeben werden. Wenn eine Umwandlung scheitern kann, 
 weil der Wert zu groß oder zu klein für den Zieldatentyp ist, dann muss ggf. auch eine Fehlerbehandlung erfolgen.
