@@ -17,7 +17,7 @@ wird das folgende Inhaltsverzeichnis um einen Link auf jeden neu erzeugten Zweig
 - [03. Functions](https://github.com/barsuhn/rust-daily/tree/functions)
 - [04. Strings](https://github.com/barsuhn/rust-daily/tree/strings)
 - [05. Collections](https://github.com/barsuhn/rust-daily/tree/collections)
-- [06. Structures](https://github.com/barsuhn/rust-daily/tree/structures)
+- [06. Structures](https://github.com/barsuhn/rust-daily/tree/structs)
 - [07. Enums](https://github.com/barsuhn/rust-daily/tree/enums)
 - [07. Borrowing](https://github.com/barsuhn/rust-daily/tree/borrowing)
 - [07. Traits](https://github.com/barsuhn/rust-daily/tree/traits)
