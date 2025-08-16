@@ -1,12 +1,15 @@
 # Zeichenketten
 
-Es gibt zwei Typen zur Repräsentation von Zeichenketten: `String` und das "Slice" `&str`.
+Es gibt zwei Typen zur Repräsentation von Zeichenketten: `String` und das *String-Slice* `&str`.
 
 ## Slices
 
 Ein Zeichenketten Literal hat in Rust den Typ `&str`. Es handelt sich dabei immer um eine unveränderbare Referenz. 
-Intern wird das Slice durch einen Zeiger und eine Länge (in bytes) repräsentiert. Ein solches Konstrukt nennt man in Rust 
-auch einen *fat pointer*.
+String-Konstanten haben den Typ `&str`, ohne dass eine Variable existiert, die referenziert wurde. Die 
+String-Konstanten werden im unveränderbaren Speicher eines Programms abgelegt. Dass diese nur als geteilte Referenz 
+in einem Rust-Programm auftauchen, ermöglicht es, dass gleiche String-Konstanten vom Compiler nur einmal im Speicher 
+abgelegt werden müssen aber an verschiedenen Stellen verwendet werden können. Intern wird das Slice durch einen 
+Zeiger und eine Länge (in bytes) repräsentiert. Ein solches Konstrukt nennt man in Rust auch einen *fat pointer*.
 
 ```rust
 let greeting = "Hello, world!";
@@ -114,7 +117,7 @@ println!("byte string: {:?}", greeting);
 ### Raw Strings
 
 Mit dem Präfix `r` werden sogenannte raw string slices definiert. In einem raw literal müssen die Zeichen
-`\` und `"` nicht maskiert (engl. escape) werden. 
+`\` und `"` nicht *maskiert* (engl. *escape*) werden. 
 
 ```rust
 let path = r"C:\Users\Rust";
@@ -126,8 +129,7 @@ Klammerung verwendet werden.
 
 ## Strings
 
-Strings sind veränderbare Zeichenketten. Der Speicher für diese Zeichenketten wird automatisch im Heap 
-verwaltet. 
+Strings sind veränderbare Zeichenketten. Der Speicher für diese Zeichenketten wird automatisch im *Heap* verwaltet. 
 
 ```rust
 let mut greeting = "Hello".to_string();
