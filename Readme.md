@@ -104,3 +104,57 @@ if x {
   println!("True!");
 }
 ```
+
+## Referenzen
+
+Bei Referenzen handelt es sich nicht um einen eigenständigen Typ. Referenzen können auf beliebige Rust-Variablen mit
+beliebigem Typ verweisen. Der Typ der Referenz auf eine Variable ist dann ein Referenztyp des Variablentyps. 
+Referenztypen werden mit dem Referenzoperator `&` gekennzeichnet. Wenn eine Variable beispielsweise den Typ `f32` 
+hat, dann hat eine Referenz auf die Variable den Typ `&f32`. Man kann auch eine Referenz auf eine Referenzvariable 
+bilden. Der Typ ist dann eine mehrfache Referenz. Eine Referenz auf `&f32` hat also den Typ `&&f32`. Referenzen sind 
+dabei analog zu normalen Variablen nicht veränderbar. Eine veränderbare Referenz wird mit `&mut` gekennzeichnet. Das 
+setzt natürlich voraus, dass die referenzierte Variable ebenfalls veränderbar ist.
+
+Eine Referenz auf eine Variable erhält man, indem man den Referenzoperator `&` oder `&mut` auf eine Variable anwendet.
+Die Referenz kann danach stellvertretend für die Variable verwendet werden. Um auf den Wert der Variablen zuzugreifen,
+muss man aber den Dereferenzierungsoperator `*` verwenden.
+
+Im folgenden Beispiel wird eine unveränderbare Referenz `v` auf die Variable `u` definiert. Anschließend wird eine 
+veränderbare Variable `x` definiert, die mit dem Wert der Variablen `u` initialisiert wird. Auf den Wert der Variablen 
+`u` wird dabei mithilfe der Referenzvariablen `v` zugegriffen, indem diese mit dem `*`-Operator dereferenziert wird. 
+Damit ist `x` zunächst eine Kopie der Variablen `u`. Da es sich um eine veränderbare Variable handelt, kann eine 
+veränderbare Referenz durch den Ausdruck `&mut x` erzeugt und in der Variablen `y` abgelegt werden. Damit kann der 
+Wert der Variablen `x` über die Referenz `y` verändert werden. Hier  ist zu beachten, dass `y` sowohl im Ausdruck 
+`*y / 2` auf der rechten Seite der Zuweisung, als auch auf der linken Seite der Zuweisung dereferenziert werden muss.
+
+Ohne die Dereferenzierung auf der linken Seite würde die Variable `y` verändert werden. Das geht aus zwei Gründen 
+nicht. Zum einen, weil die Variable `y` selbst nicht veränderbar ist. Lediglich die Referenz ist veränderbar. Für 
+eine veränderbare Variable hätte die Deklaration `let mut y:&mut u32` lauten müssen. Aber selbst dann könnte man 
+der Variablen nur eine andere Referenz zuweisen. Der Ausdruck `*y / 2` ist aber ein Wert mit dem Typ `u32` und 
+dieser kann nicht an eine Referenz zugewiesen werden.
+
+```rust
+let u:u32 = 84;
+let v:&u32 = &u;
+let mut x:u32 = *v;
+let y:&mut u32 = &mut x;
+
+*y = *y / 2;
+
+println!("u: {} x: {}", u, x);
+```
+
+Die Verwendung einer Referenz bezeichnet man in Rust als *borgen* (*borrowing*) und für die Verwendung von Referenzen 
+gibt es strenge Regeln:
+- Es kann *beliebig viele* unveränderbare Referenzen geben. Während diese Referenzen verwendet werden, darf die Variable 
+  selbst jedoch nicht verändert werden, auch wenn die Variable selbst veränderbar ist. Folglich dürfen in diesem
+  Zeitraum auch keine veränderbaren Referenzen auf die Variable erzeugt werden.
+- Es kann immer *nur eine* veränderbare Referenz gleichzeitig geben und während die veränderbare Referenz verwendet 
+  wird, darf die Variable selbst nicht verändert werden. Zudem dürfen in diesem Zeitraum auch keine unveränderbaren 
+  Referenzen auf die Variable gebildet werden.
+
+Mit diesen Regeln wird sichergestellt, dass eine Variable zu jedem Zeitpunkt nur an einer einzigen Stelle verändert 
+werden kann. Das vereinfacht insbesondere die Entwicklung von parallelen Programmen, bei denen mehrere CPU-Kerne 
+gleichzeitig auf eine Variable zugreifen könnten. Das geht nur mit unveränderbaren Referenzen und damit ist dann auch 
+sichergestellt, dass der Wert der Variablen nicht verändert werden kann. Man spricht deshalb bei unveränderbaren 
+Referenzen auch von *geteilten Referenzen*.

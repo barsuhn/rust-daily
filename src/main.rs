@@ -1,8 +1,9 @@
 fn main() {
-   integer_conversion();
+    integer_conversion();
     floating_point();
     string_and_char();
     booleans();
+    references();
 }
 
 fn integer_conversion() {
@@ -46,4 +47,15 @@ fn booleans() {
     if x {
         println!("True!");
     }
+}
+
+fn references() {
+    let u:u32 = 84;
+    let v:&u32 = &u;
+    let mut x:u32 = *v;
+    let y:&mut u32 = &mut x;
+
+    *y = *y / 2;
+
+    println!("u: {} x: {}", u, x);
 }
