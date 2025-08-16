@@ -19,10 +19,12 @@ println!("Tuple: {:?} -> {} {} {}", tuple, integer, boolean, string);
 // Tuple: (1, true, "Rust") -> 1 true Rust
 ```
 
-Eleganter wird der Zugriff auf Tupel aber, wenn Muster verwendet werden. Bei Mustern muss aber `ref` anstelle 
-von `&` angegeben werden, wenn dem Musterausdruck eine Referenz zugewiesen werden soll. Falls eine veränderbare
-Variable generiert werden soll, dann wird `mut` verwendet. Wenn der Typ bei einer Musterzuweisung nicht `Copy` 
-ist, dann wird eine Move-Zuweisung ausgeführt, welche das Muster für die weitere Verwendung ungültig macht.
+Eleganter wird der Zugriff auf Tupel, wenn Muster verwendet werden. Wenn man Referenzen auf die Tupelelemente 
+benötigt, dann kann man dies jedoch nicht mithilfe von `&` angeben. Dies wäre dann Teil des Musters. Statt dessen
+muss bei Mustern `ref` anstelle von `&` angegeben werden, wenn dem Musterausdruck eine Referenz zugewiesen 
+werden soll. Falls eine veränderbare Variable generiert werden soll, dann wird `mut` verwendet. Wenn der 
+Typ bei einer Musterzuweisung nicht `Copy` ist, dann wird eine Move-Zuweisung ausgeführt, welche das Muster 
+für die weitere Verwendung ungültig macht.
 
 ```rust
 let mut tuple = (1, false, "Rust".to_string(), 21.0);
