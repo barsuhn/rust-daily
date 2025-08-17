@@ -4,6 +4,8 @@ fn main() {
     string_and_char();
     booleans();
     references();
+    references_tomut();
+    mut_references();
 }
 
 fn integer_conversion() {
@@ -50,12 +52,29 @@ fn booleans() {
 }
 
 fn references() {
-    let u:u32 = 84;
+    let u:u32 = 42;
     let v:&u32 = &u;
-    let mut x:u32 = *v;
+
+    println!("u:{}, *v:{}", u, *v);
+}
+
+fn mut_references() {
+    let u:u32 = 21;
+    let v:u32 = 2*u;
+    let mut w:&u32 = &u;
+
+    print!("u:{}, v:{}, *w:{}", u, v, *w);
+
+    w = &v;
+
+    println!(" -> *w:{}", *w);
+}
+
+fn references_tomut() {
+    let mut x:u32 = 84;
     let y:&mut u32 = &mut x;
 
     *y = *y / 2;
 
-    println!("u: {} x: {}", u, x);
+    println!("x:{}", x);
 }
