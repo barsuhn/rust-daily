@@ -164,7 +164,7 @@ Zeichenkette eingefügt werden. Man spricht bei einer Sequenz beginnend mit dem 
 - `\t` fügt ein *Tabulator*-Zeichen ein.
 - `\\` fügt das Zeichen `\` ein.
 - `\"` fügt das Zeichen `"` ein, ohne die Zeichenketet abzuschließen.
-- 
+ 
 Mit dem Präfix `r` werden sogenannte *raw string slices* definiert. In einem *raw* Literal müssen die Zeichen
 `\` und `"` nicht *maskiert* werden. Zwischen `r` und dem einleitenden `"` können beliebig viele
 `#` Zeichen hinzugefügt werden. Eine solche Zeichenkette muss mit einem `"` gefolgt von der gleichen 
