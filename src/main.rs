@@ -78,14 +78,16 @@ fn slice_splitting() {
     println!();
 
     print!("Trimmed: ");
-    for trimmed in parts.clone().map(|p| p.trim()) {
+    for part in parts.clone() {
+        let trimmed = part.trim();
         print!("'{trimmed}' ");
     }
     println!();
 
     print!("Colors: ");
     let trim_chars: &[char] = &['{', '}', ' '];
-    for trimmed in parts.map(|p| p.trim_matches(trim_chars)) {
+    for part in parts {
+        let trimmed = part.trim_matches(trim_chars);
         print!("'{trimmed}' ");
     }
     println!();
