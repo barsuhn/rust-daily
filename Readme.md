@@ -163,7 +163,7 @@ Zeichenkette eingefügt werden. Man spricht bei einer Sequenz beginnend mit dem 
 - `\n` fügt ein *Zeilenvorschub*-Zeichen (*line feed*) ein.
 - `\t` fügt ein *Tabulator*-Zeichen ein.
 - `\\` fügt das Zeichen `\` ein.
-- `\"` fügt das Zeichen `"` ein, ohne die Zeichenketet abzuschließen.
+- `\"` fügt das Zeichen `"` ein, ohne die Zeichenkette abzuschließen.
  
 Mit dem Präfix `r` werden sogenannte *raw string slices* definiert. In einem *raw* Literal müssen die Zeichen
 `\` und `"` nicht *maskiert* werden. Zwischen `r` und dem einleitenden `"` können beliebig viele
