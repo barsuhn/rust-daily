@@ -120,6 +120,7 @@ for part in parts.clone() {
   print!("'{part}' ");
 }
 println!();
+// Parts: '{red' 'green ' 'blue ' 'yellow}'
 
 print!("Trimmed: ");
 for part in parts.clone() {
@@ -127,6 +128,7 @@ for part in parts.clone() {
   print!("'{trimmed}' ");
 }
 println!();
+// Trimmed: '{red' 'green' 'blue' 'yellow}'
 
 print!("Colors: ");
 let trim_chars: &[char] = &['{', '}', ' '];
@@ -135,6 +137,7 @@ for part in parts {
   print!("'{trimmed}' ");
 }
 println!();
+// Colors: 'red' 'green' 'blue' 'yellow'
 ```
 
 ### Binary String Literal
@@ -196,7 +199,9 @@ greeting.push('!');
 
 println!();
 println!("string: {}", greeting);
+// string: Hello, world!
 println!("rusty: {}", String::from("Let's get rusty!"));
+// rusty: Let's get rusty!
 ```
 
 ### Werte formatieren
@@ -210,6 +215,7 @@ let string = format!("{}", number);
 let value: i32 = string.parse().unwrap();
 
 println!("conversions: {:?} -> {:?} -> {:?}", number, string, value);
+// conversions: 42 -> "42" -> 42
 ```
 
 Die Makros zur Formatierung verwenden Paare von geschweiften Klammern `{}` als Platzhalter für einen Wert. Diese 
