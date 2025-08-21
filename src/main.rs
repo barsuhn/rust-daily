@@ -15,6 +15,12 @@ fn main() {
     vector_stack();
     vector_extend();
     vector_splice();
+
+    convert_to_slice();
+    mut_slices();
+    ranged_slices();
+    slice_get();
+    slice_concat();
 }
 
 fn tuple_create() {
@@ -164,4 +170,67 @@ fn vector_splice() {
 
     println!();
     println!("{v:?}");
+}
+
+fn convert_to_slice() {
+    let vec = vec![1, 2, 3];
+    let array = [4, 5, 6];
+    let vector_slice = vec.as_slice();
+    let array_slice = array.as_slice();
+
+    println!();
+    println!("vector as slice: {vector_slice:?}, array as slice: {array_slice:?}");
+
+    let vector_slice: &[i32] = &vec;
+    let array_slice: &[_] = &array;
+
+    println!("&vector: {vector_slice:?}, &array: {array_slice:?}");
+}
+
+fn mut_slices() {
+    let mut vec = vec![1, 2, 3];
+    let mut array = [4, 5, 6];
+
+    vec.push(array[0]);
+
+    let vec_slice = vec.as_mut_slice();
+    let array_slice: &mut [_] = &mut array;
+
+    (vec_slice[0], array_slice[2]) = (array_slice[2], vec_slice[0]);
+
+    println!();
+    println!("vec_slice: {vec_slice:?}, array: {array:?}");
+}
+
+fn ranged_slices() {
+    let mut vec = vec![1, 2, 3, 4, 5, 6, 7];
+    let slice = &mut vec[2..5];
+
+    (slice[0], slice[2]) = (slice[2], slice[0]);
+
+    println!();
+    println!("vec: {vec:?}");
+}
+
+fn slice_get() {
+    let vec = vec![1, 2, 3, 4, 5];
+    let slice = &vec[2..5];
+
+    println!();
+    print!("slice get: ");
+    for i in 0..5 {
+        match slice.get(i) {
+            Some(value) => print!("{value} "),
+            None => print!(". ")
+        }
+    }
+    println!();
+}
+
+fn slice_concat() {
+    let parts = ["hello", ",", " ", "world", "!"];
+    let concat = parts.concat();
+
+    println!();
+    println!("concat result: {concat}");
 }

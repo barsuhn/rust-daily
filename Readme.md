@@ -225,6 +225,91 @@ println!("{v:?}");
 
 ## Slices
 
-Ein Slice ist ein beliebiger Ausschnitt aus einem Array oder Vektor ohne eine vorgegebene Länge.
+Ein Slice ist ein beliebiger Ausschnitt aus einem Array oder Vektor ohne eine vorgegebene Länge. Es handelt sich
+dabei immer um eine Referenz mit dem Typ `&[T]`, wobei `T` ein Platzhalter für einen beliebigen Typ ist. Arrays 
+und Vektoren können mithilfe der Funktion `.as_slice()` in einen Slice umgewandelt werden. Eine Referenz auf einen 
+Array oder Vektor wird aber ebenfalls automatisch umgewandelt. 
 
-`concat()`, *verflacht* die übergebenen Slices und fügt sie zu einem Ergebnisobjekt zusammen.
+```rust
+let vec = vec![1, 2, 3];
+let array = [4, 5, 6];
+let vector_slice = vec.as_slice();
+let array_slice = array.as_slice();
+
+println!("vector as slice: {vector_slice:?}, array as slice: {array_slice:?}");
+// vector as slice: [1, 2, 3], array as slice: [4, 5, 6]
+
+let vector_slice: &[i32] = &vec;
+let array_slice: &[_] = &array;
+
+println!("&vector: {vector_slice:?}, &array: {array_slice:?}");
+// &vector: [1, 2, 3], &array: [4, 5, 6]
+```
+
+Mit `as_mut_slice()` oder einer veränderbaren Referenz können veränderbare Slices erzeugt werden. Die Elemente der 
+Slices können dann verändert werden. Es ist jedoch nicht möglich ein Vektor-Slice zu erweitern. Mit dem 
+Index-Operator `[]` kann auf einzelne Elemente eines Slices, Vektors oder Arrays zugegriffen werden. Bei 
+veränderbaren Variablen kann ein Index-Ausdruck auch auf der linken Seite der Zuweisung stehen. Im folgenden 
+Beispiel wird die Tupel-Musterzuweisung verwendet, um mehrere Elemente gleichzeitig zuzuweisen.
+
+```rust
+let mut vec = vec![1, 2, 3];
+let mut array = [4, 5, 6];
+
+vec.push(array[0]);
+
+let vec_slice = vec.as_mut_slice();
+let array_slice: &mut [_] = &mut array;
+
+(vec_slice[0], array_slice[2]) = (array_slice[2], vec_slice[0]);
+
+println!("vec_slice: {vec_slice:?}, array: {array:?}");
+// vec_slice: [6, 2, 3, 4], array: [4, 5, 1]
+```
+
+Eine weitere Möglichkeit zur Erzeugung von Slices besteht darin, Bereiche aus einem Vektor oder Array mit dem 
+Bereichsoperator zu extrahieren.
+
+```rust
+let mut vec = vec![1, 2, 3, 4, 5, 6, 7];
+let slice = &mut vec[2..5];
+
+(slice[0], slice[2]) = (slice[2], slice[0]);
+
+println!("vec: {vec:?}");
+// vec: [1, 2, 5, 4, 3, 6, 7]
+```
+
+Der Indexoperator erzeugt eine Panik, wenn der Index ungültig ist. Die Funktion `get()` liefert ein `Option<T>` 
+als Ergebnis, sodass der Fehler vom aufrufenden Code behandelt werden kann. Der Typ `Option<T>` hat entweder einen 
+Wert in der Form `Some(value)` oder keinen Wert `None`. Das folgende Beispiel verwendet Pattern Matching, um das
+Ergebnis auszuwerten. Pattern Matching soll in einem anderen Abschnitt detaillierter betrachtet werden.
+
+```rust
+let vec = vec![1, 2, 3, 4, 5];
+let slice = &vec[2..5];
+
+print!("slice get: ");
+for i in 0..5 {
+    match slice.get(i) {
+        Some(value) => print!("{value} "),
+        None => print!(". ")
+    }
+}
+println!();
+// slice get: 3 4 5 . .
+```
+
+Abschließend soll noch die Funktion `concat()` betrachtet werden. Sie *verflacht* die übergebenen Slices und fügt 
+sie zu einem Ergebnisobjekt zusammen. Der Typ des Ergebnisobjekts ist dabei abhängig vom Elementtyp der Slices. 
+Wenn ein Slice mit Strinng-Slices mittels `concat()` zusammengefügt wird, entsteht beispielsweise ein Ergebnis vom 
+Typ `String`.
+
+```rust
+let parts = ["hello", ",", " ", "world", "!"];
+let concat = parts.concat();
+
+println!();
+println!("concat result: {concat}");
+// concat result: hello, world!
+```
