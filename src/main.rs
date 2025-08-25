@@ -156,7 +156,7 @@ fn vector_extend()
     let mut numbers = vec![1, 2];
     let more_numbers = vec![3, 4];
 
-    numbers.extend_from_slice(more_numbers.as_slice());
+    numbers.extend_from_slice(&more_numbers);
 
     println!("extend_from_slice: {numbers:?} {more_numbers:?}");
 }

@@ -203,7 +203,7 @@ println!("extend: {numbers:?}");
 let mut numbers = vec![1, 2];
 let more_numbers = vec![3, 4];
 
-numbers.extend_from_slice(more_numbers.as_slice());
+numbers.extend_from_slice(&more_numbers);
 
 println!("extend_from_slice: {numbers:?} {more_numbers:?}");
 // extend_from_slice: [1, 2, 3, 4] [3, 4]
