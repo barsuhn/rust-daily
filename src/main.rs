@@ -190,8 +190,9 @@ fn convert_to_slice() {
 fn mut_slices() {
     let mut vec = vec![1, 2, 3];
     let mut array = [4, 5, 6];
+    let slice = array.as_slice();
 
-    vec.push(array[0]);
+    vec.push(slice[0]);
 
     let vec_slice = vec.as_mut_slice();
     let array_slice: &mut [_] = &mut array;
