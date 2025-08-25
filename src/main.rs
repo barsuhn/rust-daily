@@ -75,10 +75,10 @@ fn tuple_ordering() {
 
 fn array_patterns() {
     let numbers = [1, 2, 3, 4];
-    let [one, two, _, four] = numbers.clone();
+    let [_, two, _, four] = numbers.clone();
 
     println!();
-    println!("{numbers:?} -> {one} {two} _ {four}");
+    println!("{numbers:?} -> {} {two} {} {four}", numbers[0], numbers[2]);
 
     let empty: [u8;0] = [];
     println!("{empty:?}");

@@ -56,8 +56,8 @@ println!("Start rest: {:?} -> .. {}", numbers, end);
 println!("End rest: {:?} -> {} ..", numbers, start);
 ```
 
-Tupel gleichen Typs können mit verglichen werden. Dabei kann nicht nur Gleichheit, sondern auch die Ordnung von Tupeln 
-bestimmt werden, falls die Elemente geordnet werden können. 
+Tupel gleichen Typs können miteinander verglichen werden. Dabei kann nicht nur Gleichheit, sondern auch die Ordnung 
+von Tupeln bestimmt werden, falls die Elemente geordnet werden können. 
 
 ```rust
 let mut tuples = [(2, "Ferris"), (2, "Bob"), (1, "Rust")];
@@ -89,10 +89,10 @@ Hilfe eines Musters zugewiesen werden. Ein leeres Arrray wird mit einem leeren K
 
 ```rust
 let numbers = [1, 2, 3, 4];
-let [one, two, _, four] = numbers.clone();
+let [_, two, _, four] = numbers.clone();
 
-println!("{numbers:?} -> {one} {two} _ {four}");
-// [1, 2, 3, 4] -> 1 2 _ 4
+println!("{numbers:?} -> {} {two} {} {four}", numbers[0], numbers[2]);
+// [1, 2, 3, 4] -> 1 2 3 4
 
 let empty: [u8;0] = [];
 println!("{empty:?}");
