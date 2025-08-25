@@ -218,6 +218,7 @@ fn slice_get() {
     let slice = &vec[2..5];
 
     println!();
+    println!("Slice has {} items.", slice.len());
     print!("slice get: ");
     for i in 0..5 {
         match slice.get(i) {

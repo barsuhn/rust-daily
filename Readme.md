@@ -281,8 +281,10 @@ println!("vec: {vec:?}");
 // vec: [1, 2, 5, 4, 3, 6, 7]
 ```
 
-Der Indexoperator erzeugt eine Panik, wenn der Index ungültig ist. Die Funktion `get()` liefert ein `Option<T>` 
-als Ergebnis, sodass der Fehler vom aufrufenden Code behandelt werden kann. Der Typ `Option<T>` hat entweder einen 
+Mit der Funktion `.len()` kann die Anzahl der Elemente in einem Array, Vektor oder Slice bestimmt werden. Der 
+Indexoperator erzeugt eine Panik, wenn der Index ungültig, also größer oder gleich der Länge ist. Die Funktion 
+`get()` erlaubt einen Zugriff ohne die Gefahr einer Panik und liefert ein `Option<T>` als Ergebnis, sodass der 
+Fehler vom aufrufenden Code behandelt werden kann. Der Typ `Option<T>` hat entweder einen 
 Wert in der Form `Some(value)` oder keinen Wert `None`. Das folgende Beispiel verwendet Pattern Matching, um das
 Ergebnis auszuwerten. Pattern Matching soll in einem anderen Abschnitt detaillierter betrachtet werden.
 
@@ -290,6 +292,8 @@ Ergebnis auszuwerten. Pattern Matching soll in einem anderen Abschnitt detaillie
 let vec = vec![1, 2, 3, 4, 5];
 let slice = &vec[2..5];
 
+println!("Slice has {} items.", slice.len());
+// Slice has 3 items.
 print!("slice get: ");
 for i in 0..5 {
     match slice.get(i) {
