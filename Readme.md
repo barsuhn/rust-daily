@@ -2,14 +2,14 @@
 
 ## Module und Sichtbarkeit
 
-Wenn der Code auf mehrere Dateien aufgeteilt wird, bezeichnet man jede Datei ein Modul. Der Name des Moduls
+Wenn der Code auf mehrere Dateien aufgeteilt wird, bezeichnet man jede Datei als ein Modul. Der Name des Moduls
 wird durch den Namen der Datei vorgegeben. Alle Elemente eines Moduls sind normalerweise nur innerhalb des 
 Moduls sichtbar. Um ein Programmkonstrukt in einem Modul für andere Module sichtbar zu machen, muss das
 das Konstrukt mit dem Schlüsselwort `pub` als öffentlich (public) gekennzeichnet werden. In diesem Abschnitt 
-werden alle Strukturdefinitionen in einem eigenständigen Modul definiert. Alles was in diesem Modul nicht 
+werden alle Strukturdefinitionen in einem eigenständigen Modul definiert. Alles, was in diesem Modul nicht 
 mit `pub` markiert wird, bleibt damit für andere Module unsichtbar.
 
-# Deklaration
+## Deklaration
 
 Zusammengesetzte Datenstrukturen werden in Rust mit dem Schlüsselwort `struct` deklariert. In geschweiften 
 Klammern werden dann die Elemente der Struktur aufgelistet. Die einzelnen Elemente bestehen aus einem Namen und
@@ -19,12 +19,12 @@ durch Kommata getrennt, wobei auch hinter dem letzten Element ein Komma stehen d
 Elemente zu schreiben, erleichtert die spätere Erweiterung der Strukturen.
 
 Zur Erzeugung einer Strukturinstanz wird der Name der Struktur gefolgt von einer Initialisierungsliste
-angegeben. Die Initialisierungsliste enthält Paare von Namen und Werten, die durch Doppelpunkte voneinander 
-getrennt werden. Die Paare werden wiederum durch Kommata getrennt. Wird ein Strukturelement mit einer Variablen 
-initialisiert, deren Name mit dem Elementnamen übereinstimmt, so kann einfach der Name der Variablen verwendet 
-werden. Im folgenden Beispiel kann statt `age: age` in der Initialisierungsliste einfach `age` geschrieben werden. 
-Beim Element `name` ist das nicht der Fall, weil die Parametervariable zwar den gleichen Namen aber nicht den 
-gleichen Typ wie das Strukturelement hat.
+in geschweiften Klammern `{}` angegeben. Die Initialisierungsliste enthält Paare von Namen und Werten, die durch 
+Doppelpunkte voneinander getrennt werden. Die Paare werden wiederum durch Kommata getrennt. Wird ein Strukturelement 
+mit einer Variablen initialisiert, deren Name mit dem Elementnamen übereinstimmt, so kann einfach der Name der 
+Variablen verwendet werden. Im folgenden Beispiel kann statt `age: age` in der Initialisierungsliste einfach `age` 
+geschrieben werden. Beim Element `name` ist das nicht der Fall, weil die Parametervariable zwar den gleichen Namen,
+aber nicht den gleichen Typ wie das Strukturelement hat.
 
 ```rust
 pub struct Person {
@@ -98,6 +98,34 @@ impl Exam {
 }
 ```
 
+## Tupel-Strukturen
+
+Strukturen können alternativ auch als Tupel definiert werden. In diesem Fall werden die Elemente in runden Klammern
+als Liste von Typen angegeben. Um ein Element auch außerhalb des Noduls sichtbar zu machen, muss vor dem entsprechenden
+Typeintrag in der Liste das Schlüsselwort `pub` angegeben werden.
+
+```rust
+pub struct ToDo(bool, pub String);
+```
+
+Auch für Tupel-Strukturen können Implementierungen angegeben werden.
+
+```rust
+impl ToDo {
+    pub fn new(status: bool, task: &str) -> Self {
+        ToDo(status, task.to_string())
+    }
+
+    pub fn check(&mut self) {
+        self.0 = true;
+    }
+
+    pub fn is_done(&self) -> bool {
+        self.0
+    }
+}
+```
+
 ## Verwendung
 
 Im übergeordneten Modul müssen Untermodule mit dem Schlüsselwort `mod` deklariert werden. In diesem Fall ist das
@@ -107,7 +135,7 @@ Die Variable `buddy` ist eine Instanz der Struktur `Person`. Mit dem Punkt-Opera
 einer Struktur zugreifen. Da sie mit `let mut` deklariert wurde, kann ein Strukturelement sogar auf der linken Seite
 einer Zuweisung stehen.
 
-Die Variable `exam` erzeugt mit Hilfe der Funktion `new` eine neue Instanz der Struktur `Exam`. Es handelt sich um
+Die Variable `exam` erzeugt mithilfe der Funktion `new` eine neue Instanz der Struktur `Exam`. Es handelt sich um
 eine Typfunktion und wird deshalb mit dem Typnamen gefolgt von zwei Doppelpunkten `::` verwendet. Da die 
 verändernde Instanzfunktion `set_grade()` von `exam` aufgerufen wird, muss die Variable ebenfalls mit `let mut` 
 deklariert werden. Instanzfunktionen werden mit der Instanzvariablen aufgerufen und mit dem Punkt-Operator `.` 
@@ -116,9 +144,11 @@ vom Variablennamen getrennt.
 ```rust
 mod person;
 mod exam;
+mod todo;
 
 use person::make_person;
 use exam::Exam;
+use todo::ToDo;
 
 fn main() {
     let mut buddy = make_person("Bob", 41);
@@ -132,6 +162,32 @@ fn main() {
     exam.print_certificate();
     exam.set_grade(3);
     exam.print_certificate();
+
+    println!();
+    process_todos();
+}
+
+
+fn process_todos() {
+    let mut todos = [
+        ToDo::new(false, "Dinner"),
+        ToDo::new(false, "Laundry"),
+        ToDo::new(false, "Dishes"),
+    ];
+
+    for i in 0..3 {
+        let todo = &todos[i];
+
+        println!("Item {}: {} is {}", i, todo.1, if todo.is_done() {"done"} else {"open"});
+    }
+
+    todos[0].check();
+    todos[2].check();
+
+    println!();
+    for (i, todo) in todos.iter().enumerate() {
+        println!("Item {}: {} is {}", i, todo.1, if todo.is_done() {"done"} else {"still open"});
+    }
 }
 ```
 
