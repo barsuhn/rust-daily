@@ -49,7 +49,7 @@ zudem veränderbar, so kann die Funktion die Instanz auch verändern. Wenn kein 
 dann wird die Funktion für den Strukturtyp deklariert.
 
 Die Funktion `new` im folgenden Beispiel ist dem Typ `Exam` zugeordnet. Die Funktionen `set_grade()` und
-`print_ceretificate()` haben jedoch einen `self` Parameter, was sie zu Instanzfunktionen macht. Die Referenz 
+`print_certificate()` haben jedoch einen `self` Parameter, was sie zu Instanzfunktionen macht. Die Referenz 
 auf die Instanz muss dabei den Namen `self` haben. Der Typ wird nicht angegeben, da der `impl` Block bereits 
 den Typ festlegt. Die Funktion `set_grade()` bekommt self sogar als `&mut`, was eine Veränderung der Instanz 
 ermöglicht.
@@ -87,12 +87,15 @@ impl Exam {
         match self.grade {
             Some(grade) =>  {
                 if grade > 4 {
-                    println!("{} hat die Prüfung in {} nicht bestanden.", self.attendee.name, self.subject);
+                    println!("{} hat die Prüfung in {} nicht bestanden.",
+                             self.attendee.name, self.subject);
                 } else {
-                    println!("{} hat die Prüfung in {} mit der Note {} bestanden.", self.attendee.name, self.subject, grade);
+                    println!("{} hat die Prüfung in {} mit der Note {} bestanden.",
+                             self.attendee.name, self.subject, grade);
                 }
             }
-            None => println!("{} hat die Prüfung in {} noch nicht absolviert.", self.attendee.name, self.subject),
+            None => println!("{} hat die Prüfung in {} noch nicht absolviert.",
+                             self.attendee.name, self.subject),
         }
     }
 }
@@ -101,14 +104,15 @@ impl Exam {
 ## Tupel-Strukturen
 
 Strukturen können alternativ auch als Tupel definiert werden. In diesem Fall werden die Elemente in runden Klammern
-als Liste von Typen angegeben. Um ein Element auch außerhalb des Noduls sichtbar zu machen, muss vor dem entsprechenden
+als Liste von Typen angegeben. Um ein Element auch außerhalb des Moduls sichtbar zu machen, muss vor dem entsprechenden
 Typeintrag in der Liste das Schlüsselwort `pub` angegeben werden.
 
 ```rust
 pub struct ToDo(bool, pub String);
 ```
 
-Auch für Tupel-Strukturen können Implementierungen angegeben werden.
+Auch für Tupel-Strukturen können Implementierungen angegeben werden. Auf die Elemente einer Tupel-Struktur wird, wie 
+auf die Elemente eines Tupels mit dem Index des Elements zugegriffen.
 
 ```rust
 impl ToDo {
@@ -129,7 +133,9 @@ impl ToDo {
 ## Verwendung
 
 Im übergeordneten Modul müssen Untermodule mit dem Schlüsselwort `mod` deklariert werden. In diesem Fall ist das
-übergeordnete Modul die Datei `main.rs`, welche die Wurzel des Modulbaums der ausführbaren Datei bildet. 
+übergeordnete Modul die Datei `main.rs`, welche die Wurzel des Modulbaums der ausführbaren Datei bildet. Zudem 
+müssen Typen und Funktionen aus einem anderen Modul mittels `use` importiert werden, wenn diese in einem 
+anderen Modul verwendet werden sollen.
 
 Die Variable `buddy` ist eine Instanz der Struktur `Person`. Mit dem Punkt-Operator `.` kann man auf die Elemente
 einer Struktur zugreifen. Da sie mit `let mut` deklariert wurde, kann ein Strukturelement sogar auf der linken Seite
@@ -140,6 +146,12 @@ eine Typfunktion und wird deshalb mit dem Typnamen gefolgt von zwei Doppelpunkte
 verändernde Instanzfunktion `set_grade()` von `exam` aufgerufen wird, muss die Variable ebenfalls mit `let mut` 
 deklariert werden. Instanzfunktionen werden mit der Instanzvariablen aufgerufen und mit dem Punkt-Operator `.` 
 vom Variablennamen getrennt.
+
+In der Funktion `process_todos()` wird der Tupel-Strukturtyp `ToDo` verwendet. Das Element `.0` des Tupels ist aber
+außerhalb des `todo`-Moduls nicht sichtbar. Es kann nur indirekt über die Funktionen `is_done()` und `check()` 
+verwendet werden. Ds das Element `.1` mit `pub` als öffentlich deklariert wurde, kann auch außerhalb des Moduls
+direkt darauf zugegriffen werden. Es ist jedoch fast immer besser, wenn außerhalb des definierenden Moduls nur 
+über Funktionen auf die Elemente zugegriffen wird, da sie im Allgemeinen besser lesbar sind.
 
 ```rust
 mod person;
@@ -190,4 +202,3 @@ fn process_todos() {
     }
 }
 ```
-

@@ -23,12 +23,15 @@ impl Exam {
         match self.grade {
             Some(grade) =>  {
                 if grade > 4 {
-                    println!("{} hat die Prüfung in {} nicht bestanden.", self.attendee.name, self.subject);
+                    println!("{} hat die Prüfung in {} nicht bestanden.",
+                             self.attendee.name, self.subject);
                 } else {
-                    println!("{} hat die Prüfung in {} mit der Note {} bestanden.", self.attendee.name, self.subject, grade);
+                    println!("{} hat die Prüfung in {} mit der Note {} bestanden.",
+                             self.attendee.name, self.subject, grade);
                 }
             }
-            None => println!("{} hat die Prüfung in {} noch nicht absolviert.", self.attendee.name, self.subject),
+            None => println!("{} hat die Prüfung in {} noch nicht absolviert.",
+                             self.attendee.name, self.subject),
         }
     }
 }
