@@ -9,9 +9,11 @@ use todo::ToDo;
 fn main() {
     let mut buddy = make_person("Bob", 41);
 
-    println!("Das ist mein Kumpel {}. Er war gestern noch {} Jahre alt.", buddy.name, buddy.age);
+    println!("Das ist mein Kumpel {}. Er war gestern noch {} Jahre alt.",
+             buddy.name, buddy.age);
     buddy.age += 1;
-    println!("Heute ist aber sein Geburtstag und er ist {} Jahre alt geworden.", buddy.age);
+    println!("Heute ist aber sein Geburtstag und er ist {} Jahre alt geworden.",
+             buddy.age);
 
     let mut exam = Exam::new(buddy, "Sackhüpfen");
 
@@ -33,7 +35,8 @@ fn process_todos() {
     for i in 0..3 {
         let todo = &todos[i];
 
-        println!("Item {}: {} is {}", i, todo.1, if todo.is_done() {"done"} else {"open"});
+        println!("Item {}: {} is {}", i, todo.1,
+                 if todo.is_done() {"done"} else {"open"});
     }
 
     todos[0].check();
@@ -41,6 +44,7 @@ fn process_todos() {
 
     println!();
     for (i, todo) in todos.iter().enumerate() {
-        println!("Item {}: {} is {}", i, todo.1, if todo.is_done() {"done"} else {"still open"});
+        println!("Item {}: {} is {}", i, todo.1,
+                 if todo.is_done() {"done"} else {"still open"});
     }
 }
