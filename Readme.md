@@ -30,7 +30,7 @@ pub fn print_colors() {
 ```
 
 Bei Enumerationen in Rust können den einzelnen Fällen einer Enumeration beliebige zusätzliche Daten zugewiesen
-werden. Diese Werte können mit einem `match`-Ausdruck ebenfalls extrahiert werden.
+werden. Diese Werte können mit einem `match`-Ausdruck oder einem `let`-Muster extrahiert werden.
 
 Im folgenden Beispiel werden den Elementen der `Shape` Enumeration jeweils Struktur-Instanzen mit Geometriedaten 
 zugewiesen. Diese Daten können im `match`-Ausdruck extrahiert werden.
@@ -71,9 +71,11 @@ pub fn print_shapes() {
     for shape in shapes {
         match shape {
             Shape::LineShape(l) =>
-                println!("line: from ({}, {}) to ({}, {})", l.start.x, l.start.y, l.end.x, l.end.y),
+                println!("line: from ({}, {}) to ({}, {})", 
+                         l.start.x, l.start.y, l.end.x, l.end.y),
             Shape::CircleShape(c) =>
-                println!("circle: at ({}, {}) radius {}", c.center.x, c.center.y, c.radius),
+                println!("circle: at ({}, {}) radius {}", 
+                         c.center.x, c.center.y, c.radius),
         }
     }
     

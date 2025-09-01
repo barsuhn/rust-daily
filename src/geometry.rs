@@ -33,9 +33,11 @@ pub fn print_shapes() {
     for shape in shapes {
         match shape {
             Shape::LineShape(l) =>
-                println!("line: from ({}, {}) to ({}, {})", l.start.x, l.start.y, l.end.x, l.end.y),
+                println!("line: from ({}, {}) to ({}, {})",
+                         l.start.x, l.start.y, l.end.x, l.end.y),
             Shape::CircleShape(c) =>
-                println!("circle: at ({}, {}) radius {}", c.center.x, c.center.y, c.radius),
+                println!("circle: at ({}, {}) radius {}",
+                         c.center.x, c.center.y, c.radius),
         }
     }
 }
