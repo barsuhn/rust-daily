@@ -19,4 +19,3 @@ wird das folgende Inhaltsverzeichnis um einen Link auf jeden neu erzeugten Zweig
 - [05. Collections](https://github.com/barsuhn/rust-daily/tree/collections)
 - [06. Structures](https://github.com/barsuhn/rust-daily/tree/structs)
 - [07. Enums](https://github.com/barsuhn/rust-daily/tree/enums)
-- [08. Traits](https://github.com/barsuhn/rust-daily/tree/traits)
